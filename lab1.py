@@ -1,21 +1,31 @@
-eps = 1.0
+## Ex1  precizie masina
+def mach_precision():
+    m = -1
+    while 1:
+        if 1.0 + pow(10,m) == 1.0:
+            return pow(10,m)
+        m = m - 1
 
-while((1.0 + 0.5*eps)!=1.0):
-    eps = 0.5 * eps
+print(mach_precision())
 
-print("Valoare precizie masina : ", eps)
+## Ex2.1
+def non_associative():
+    a = 1.0
+    b = mach_precision()
+    c = mach_precision()
+    if (a + b) + c == a + (b + c):
+        return "Asociativa!"
+    else:
+        return "NEAsociativa!"
+## Ex2.2
+def non_associative2():
+    a = 1.2
+    b = mach_precision()
+    c = mach_precision()
+    if (a * b) * c == a * (b * c):
+        return "Asociativa!"
+    else:
+        return "NEAsociativa!"
 
-a = 1.0
-b = eps / 10
-c = eps / 10
-
-sum1 = a * b
-print("[SUM1] a + b :", sum1)
-sum1 = sum1 * c
-
-sum2 = b * c 
-print("[SUM2] b + c :",sum2)
-sum2 = sum2 * a
-
-print("Suma ( a + b ) + c = ", sum1)
-print("Suma a + ( b + c ) = ", sum2)
+print("Adunare : ", non_associative())
+print("Inmultire : ", non_associative2())
