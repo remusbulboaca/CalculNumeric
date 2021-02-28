@@ -5,10 +5,9 @@ import math
 import time
 
 suma = 0
-
+# source : https://www.geeksforgeeks.org/sum-of-the-tanx-expansion-upto-n-terms/
 # Function to find tan(x) upto n terms
 def Tanx_expansion(terms, x):
-    # To store value of the expansion
     global suma
     suma = 0
     for i in range(1, terms + 1):
@@ -25,8 +24,7 @@ def Tanx_expansion(terms, x):
             B = B + temp / (k + 1)
 
         suma = suma + pow(-4, i) * (1 - pow(4, i)) * B * pow(x, 2 * i - 1) / math.factorial(2 * i)
-        # Print the value of expansion
-    
+       
 
 def tangenta(n,x):
     Tanx_expansion(n,x)
