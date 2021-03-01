@@ -1,7 +1,7 @@
 from tangenta import *
 import time
 from generator import *
-
+from lab1 import *
 
 def main(n, x):
     return tangenta(n, x)
