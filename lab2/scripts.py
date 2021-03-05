@@ -38,3 +38,12 @@ def transpusa(A):
 
 def determinant(A):
     return np.linalg.det(A)
+
+
+def solve_system(L , b):
+    if not determinant(L):
+        return 0
+
+    for i in range(1,len(L)+1):
+        for j in range(i+1, len(L)):
+            print(L[j][j])

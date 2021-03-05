@@ -1,15 +1,25 @@
 from pprint import pprint
 from scripts import *
-
+import json
+#Ex1:
 # initiala
-A = np.array([[2.25, 3, 3], [3, 9.0625, 13], [3, 13, 24]])
+def load_input(file_name=r'data.json'):
+    with open(file_name, 'r') as file_handler:
+        return json.load(file_handler)
+data = load_input()
+
+A = np.array(data[0])
+b = np.array(data[1])
+
 # descompunerea L
 L = cholesky(A)
-print(L)
+print("L:\n",L)
 # L transpusa
 Lt = transpusa(L)
+print("Lt : \n",Lt)
 
-# determinant A
-detA = determinant(L)*determinant(Lt)  
-print("Determinant L*Lt L:", detA)
+#Ex2:
+print("\nDet A: ", determinant(L)*determinant(Lt))
 
+#Ex3:
+solve_system(L,b)
