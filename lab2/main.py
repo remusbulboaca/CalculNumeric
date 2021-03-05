@@ -2,6 +2,7 @@ from pprint import pprint
 from scripts import *
 import scipy
 import json
+
 #Ex1:
 # initiala
 def load_input(file_name=r'data.json'):
