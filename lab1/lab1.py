@@ -10,6 +10,7 @@ def ex1():
             mach = 10**m
             break
         m = m - 1
+    mach = 10**(m+1)
     return mach
 
 #Ex 2.a
@@ -24,7 +25,7 @@ def ex2a():
 
 #Ex 2.b
 def ex2b():
-    a = 1.2
+    a = 0.2
     b = ex1()/10
     c = ex1()/10
     if (a * b) * c == a * (b * c):
