@@ -39,11 +39,34 @@ def transpusa(A):
 def determinant(A):
     return np.linalg.det(A)
 
+# def solve_system(L , b):
+#     # if not determinant(L):
+#     #     return 0
+#     # for i in range(1,len(L)):
+#     #     for j in range(i-1, len(L)):
+#     #         print(L[i-1][j-1])
+#     array = []
+#     for i in range(0,len(L)):
+#         for j in range(0,i+1):
+#             array.append(L[i][j])
+#     print(array)
+#
+#     for i in range(0,len(array)):
+#
+def solve_system2(A, b, x):
+    for i in range (len(A),1,-1):
+        sigma_sum = 0
+        for j in range(i+1,len(A)+1):
+            sigma_sum += A[i - 1, j - 1] * x[j - 1]
+        x_i = (b[i - 1] - sigma_sum) / A[i-1, i-1]
+        x[i-1] = x_i
+    return(x)
 
-def solve_system(L , b):
-    if not determinant(L):
-        return 0
-
-    for i in range(1,len(L)+1):
-        for j in range(i+1, len(L)):
-            print(L[j][j])
+def solve_system(A, b, x):
+    for i in range(1, len(A) + 1):
+        sigma_sum = 0
+        for j in range(1, i):
+            sigma_sum += A[i - 1, j - 1] * x[j - 1]
+        x_i = (b[i - 1] - sigma_sum) / A[i - 1, i - 1]
+        x = np.append(x, x_i)
+    print(solve_system2(A,b,x))

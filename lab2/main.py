@@ -1,5 +1,6 @@
 from pprint import pprint
 from scripts import *
+import scipy
 import json
 #Ex1:
 # initiala
@@ -22,4 +23,5 @@ print("Lt : \n",Lt)
 print("\nDet A: ", determinant(L)*determinant(Lt))
 
 #Ex3:
-solve_system(L,b)
+x = np.array([])
+solve_system(L,b,x)
