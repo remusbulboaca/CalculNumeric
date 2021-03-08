@@ -4,9 +4,9 @@ from scripts import *
 from scipy.linalg import lu
 import json
 import sys
+from test import *
 
-#Ex1:
-# initiala
+
 
 def main(filename,mode,len):
 
@@ -25,16 +25,19 @@ def main(filename,mode,len):
         b = np.array(data[1])
         m = np.array(data[2])
 
+        print("\nA: \n", A)
+        print("\nb: \n", b)
+
     if mode == "Generate":
         m = 18
 
-        b1 = np.random.random_integers(0, 5, size=(int(len), int(len)))
+        b1 = np.random.random_integers(0, 30, size=(int(len), int(len)))
         A = (b1 + b1.T) / 2
         # A = np.array([[2.25, 3, 3],[3, 9.0625, 13],[3, 13, 24]])
-
+        A1 = A.copy()
 
         # b = np.array([9, 35.0625, 61])
-        b = np.random.random_integers(1, 3,size = (int(len)))
+        b = np.random.random_integers(1, 10,size = (int(len)))
 
         print("\nA: \n",A)
         print("\nb: \n", b)
@@ -48,13 +51,12 @@ def main(filename,mode,len):
     print("\nEpsilon: ",epsilon)
 
     if verify_matrix(A):
-        print("\nA: \n", A)
-        print("\nb: \n", b)
+        
         # descompunerea L
         L = cholesky(A)
         print("\nL:\n",L)
         # L transpusa
-        Lt = transpusa(L)
+        Lt = np.array(transpusa(L))
         print("Lt : \n",Lt)
 
 
@@ -73,16 +75,22 @@ def main(filename,mode,len):
         #Ex4:
         print("-" * 20)
         print("\n Ex4: \n")
-        solution_check(A,x,b)
+        if mode == "File":
+            A1 = np.array(data[0])
+        solution_check(A1,x,b)
+
 
         #Ex5:
         print("-" * 20)
         print("Ex5:")
-        p, l, u = lu(A)
+        if mode == "File":
+            A1 = np.array(data[0])
+        p, l, u = lu(A1)
+        print("\nMatrice: \n",A1)
         print("\nL:\n",l, "\n")
         print("\nU:\n",u, "\n")
-        x1 = np.linalg.solve(A, b)
-        print("\nx:\n",x1)
+        x = np.linalg.solve(A1, b)
+        print("\nx:\n",x)
 
         #Ex6:
         print("-" * 20)

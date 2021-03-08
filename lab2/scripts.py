@@ -17,17 +17,22 @@ def cholesky(A):
     # returns the lower variant triangular matrix, L
     n = len(A)
     # Create zero matrix for L
-    L = np.array([[0.0] * n for i in range(n)])
+    # L = np.array([[0.0] * n for i in range(n)])
     # Perform the Cholesky decomposition
     for i in range(n):
         for k in range(i+1):
-            tmp_sum = sum(L[i][j] * L[k][j] for j in range(k))
+            tmp_sum = sum(A[i][j] * A[k][j] for j in range(k))
             
             if (i == k): # Diagonal elements
-                L[i][k] = math.sqrt(A[i][i] - tmp_sum)
+                A[i][k] = math.sqrt(abs(A[i][i] - tmp_sum))
             else:
-                L[i][k] = (1.0 / L[k][k] * (A[i][k] - tmp_sum))
-    return L
+                A[i][k] = (1.0 / A[k][k] * (A[i][k] - tmp_sum))
+
+    for i in range(0, n - 1):
+        for j in range(i + 1, n):
+            A[i][j] = 0
+
+    return A
  
 # A = [[2.25, 3, 3], [3, 9.0625, 13], [3, 13, 24]]
 # L = cholesky(A)
@@ -91,6 +96,9 @@ def solve_system(A, b, x,epsilon):
         x_i = (b[i - 1] - sigma_sum) / A[i - 1, i - 1]
         x = np.append(x, x_i)
     return solve_system2(A,b,x,epsilon)
+
+
+
 
 def solution_check(A,xChol,b):
     # A_init*xChol
