@@ -3,32 +3,39 @@ import numpy as np
 from numpy.linalg import inv
 import math
 
+
 def verify_matrix(A):
     n = len(A)
     ok = True
     for i in range(n):
         for j in range(n):
-            if A[i][j] < 0 :
+            if A[i][j] < 0:
                 ok = False
     return ok
 
-def cholesky(A):
 
+def cholesky(A):
     # returns the lower variant triangular matrix, L
     n = len(A)
     # Create zero matrix for L
-    L = np.array([[0.0] * n for i in range(n)])
+    # L = np.array([[0.0] * n for i in range(n)])
     # Perform the Cholesky decomposition
     for i in range(n):
-        for k in range(i+1):
-            tmp_sum = sum(L[i][j] * L[k][j] for j in range(k))
-            
-            if (i == k): # Diagonal elements
-                L[i][k] = math.sqrt(A[i][i] - tmp_sum)
+        for k in range(i + 1):
+            tmp_sum = sum(A[i][j] * A[k][j] for j in range(k))
+
+            if (i == k):  # Diagonal elements
+                A[i][k] = math.sqrt(abs(A[i][i] - tmp_sum))
             else:
-                L[i][k] = (1.0 / L[k][k] * (A[i][k] - tmp_sum))
-    return L
- 
+                A[i][k] = (1.0 / A[k][k] * (A[i][k] - tmp_sum))
+
+    for i in range(0, n - 1):
+        for j in range(i + 1, n):
+            A[i][j] = 0
+
+    return A
+
+
 # A = [[2.25, 3, 3], [3, 9.0625, 13], [3, 13, 24]]
 # L = cholesky(A)
 
@@ -41,19 +48,23 @@ def cholesky(A):
 def transpusa(A):
     return A.transpose()
 
+
 def determinant(A):
     return np.linalg.det(A)
 
-def LLt_generate(L,Lt):
+
+def LLt_generate(L, Lt):
     n = len(L)
     LLt = np.array([[0.0] * n for i in range(n)])
     for i in range(n):
         for j in range(n):
             if i != j:
-                LLt[i][j] = L[i][j]+ Lt[i][j]
+                LLt[i][j] = L[i][j] + Lt[i][j]
             else:
                 LLt[i][j] = L[i][j]
     return LLt
+
+
 # def solve_system(L , b):
 #     # if not determinant(L):
 #     #     return 0
@@ -68,41 +79,42 @@ def LLt_generate(L,Lt):
 #
 #     for i in range(0,len(array)):
 #
-def solve_system2(A, b, x,epsilon):
-    for i in range (len(A),1,-1):
+def solve_system2(A, b, x, epsilon):
+    for i in range(len(A), 1, -1):
         sigma_sum = 0
-        for j in range(i+1,len(A)+1):
+        for j in range(i + 1, len(A) + 1):
             sigma_sum += A[i - 1, j - 1] * x[j - 1]
-        if not np.abs(A[i-1, i-1]) > epsilon:
+        if not np.abs(A[i - 1, i - 1]) > epsilon:
             print("We can't solve the system.")
             return []
-        x_i = (b[i - 1] - sigma_sum) / A[i-1, i-1]
-        x[i-1] = x_i
-    return(x)
+        x_i = (b[i - 1] - sigma_sum) / A[i - 1, i - 1]
+        x[i - 1] = x_i
+    return (x)
 
-def solve_system(A, b, x,epsilon):
+
+def solve_system(A, b, x, epsilon):
     for i in range(1, len(A) + 1):
         sigma_sum = 0
         for j in range(1, i):
             sigma_sum += A[i - 1, j - 1] * x[j - 1]
-        if not np.abs(A[i-1, i-1]) > epsilon:
+        if not np.abs(A[i - 1, i - 1]) > epsilon:
             print("We can't solve the system.")
             return []
         x_i = (b[i - 1] - sigma_sum) / A[i - 1, i - 1]
         x = np.append(x, x_i)
-    return solve_system2(A,b,x,epsilon)
+    return solve_system2(A, b, x, epsilon)
 
-def solution_check(A,xChol,b):
+
+def solution_check(A, xChol, b):
     # A_init*xChol
     C = A.dot(xChol)
     # euclidian distance
     dist = np.linalg.norm(C - b)
-    print("{} < 10 ** (-8) {}\n".format(dist,dist < 10 ** (-8)))
-
+    print("{} < 10 ** (-8) {}\n".format(dist, dist < 10 ** (-8)))
 
 
 # https://integratedmlai.com/matrixinverse/
-def invert_matrix(A,epsilon):
+def invert_matrix(A, epsilon):
     n = len(A)
     AM = A
 
@@ -132,5 +144,3 @@ def invert_matrix(A,epsilon):
                 AM[i][j] = AM[i][j] - crScaler * AM[fd][j]
                 IM[i][j] = IM[i][j] - crScaler * IM[fd][j]
     return IM
-
-
