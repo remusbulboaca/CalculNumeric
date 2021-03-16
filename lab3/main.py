@@ -1,5 +1,6 @@
 import numpy as np
-
+import copy
+epsilon = 10 ** float(-16)
 
 class matriceA:
     a = []
@@ -60,7 +61,8 @@ class matriceB:
 class Matrix_operations:
     sum = []
     def sum(self,matriceB, matriceA):
-        acopy = matriceA.a
+        acopy = copy.deepcopy(matriceA.a)
+
         p = matriceB.p
         q = matriceB.q
         # for i in range(0,len(acopy)):
@@ -79,21 +81,42 @@ class Matrix_operations:
                 if(line-j[1] == p):
                     acopy[line][index] = (j[0] + matriceB.c[j[1]],j[1])
         self.sum = acopy
-        
-        
+
+    def compare_vectors(self,matriceA):
+        b = self.sum
+        for line_num, i in enumerate(matriceA.a):
+            for j in i:
+                not_found = True
+                for tup in b[line_num]:
+                    if tup[1] == j[1]:
+                        if abs(tup[0] - j[0]) < epsilon:
+                            not_found = False
+                            break
+                if not_found:
+                    return False
+        return True       
 
 
 a = matriceA
 a.citire_eficienta_a(a,"res/a.txt")
-
+print(a.a[2019])
 b = matriceB
 b.citire_eficienta_b(b,"res/b.txt")
 
 
 operations = Matrix_operations()
 operations.sum(b,a)
-print(operations.sum)
 
+
+
+aplusb = matriceA
+aplusb.citire_eficienta_a(aplusb,"res/aplusb.txt")
+#print(operations.sum[2020])
+print(a.a[2019])
+print(b.b[2019])
+print(b.a[2019])
+print(b.c[2019])
+print(aplusb.a[2019])
 
 
 

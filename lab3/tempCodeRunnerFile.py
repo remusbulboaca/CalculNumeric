@@ -1,2 +1,1 @@
-operations = Matrix_operations()
-operations.sum(b,a)
+print(operations.compare_vectors(aplusb))
