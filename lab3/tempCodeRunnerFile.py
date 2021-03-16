@@ -1,0 +1,1 @@
+a = citire_eficienta_a("res/a.txt")

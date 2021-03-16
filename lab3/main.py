@@ -22,7 +22,26 @@ def citire_eficienta_a(filename):
                 a[i].append((val, j))
         return a
 
-
-
-a = citire_eficienta_a("res/b.txt")
-print(a)
+def citire_eficienta_b(filename):
+    with open(filename, 'r') as f:
+        n = f.readline()
+        p = f.readline()
+        q = f.readline()
+        f.readline()
+        switch = 0
+        a = []
+        b = []
+        c = []
+        for line in f:
+            if(line == '\n'):
+                switch = switch + 1
+                continue
+            if(switch == 0):
+                a.append(line.rstrip('\n'))
+            if(switch == 1):
+                b.append(line.rstrip('\n'))
+            if(switch == 2):
+                c.append(line.rstrip('\n'))     
+    print(len(a),len(b),len(c))
+# a = citire_eficienta_a("res/a.txt")
+citire_eficienta_b("res/b.txt")
