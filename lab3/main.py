@@ -61,7 +61,7 @@ class matriceB:
 class Matrix_operations:
     sum = []
     def sum(self,matriceB, matriceA):
-        acopy = copy.deepcopy(matriceA.a)
+        acopy = matriceA.a.copy()
 
         p = matriceB.p
         q = matriceB.q
