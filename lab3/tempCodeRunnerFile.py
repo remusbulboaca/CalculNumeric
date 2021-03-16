@@ -1,1 +1,2 @@
-a = citire_eficienta_a("res/a.txt")
+operations = Matrix_operations()
+operations.sum(b,a)
