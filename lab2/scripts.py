@@ -21,10 +21,10 @@ def cholesky(A):
     # L = np.array([[0.0] * n for i in range(n)])
     # Perform the Cholesky decomposition
     for i in range(n):
-        for k in range(i + 1):
+        for k in range(i+1):
             tmp_sum = sum(A[i][j] * A[k][j] for j in range(k))
-
-            if (i == k):  # Diagonal elements
+            
+            if (i == k): # Diagonal elements
                 A[i][k] = math.sqrt(abs(A[i][i] - tmp_sum))
             else:
                 A[i][k] = (1.0 / A[k][k] * (A[i][k] - tmp_sum))
@@ -34,8 +34,7 @@ def cholesky(A):
             A[i][j] = 0
 
     return A
-
-
+ 
 # A = [[2.25, 3, 3], [3, 9.0625, 13], [3, 13, 24]]
 # L = cholesky(A)
 
@@ -105,7 +104,9 @@ def solve_system(A, b, x, epsilon):
     return solve_system2(A, b, x, epsilon)
 
 
-def solution_check(A, xChol, b):
+
+
+def solution_check(A,xChol,b):
     # A_init*xChol
     C = A.dot(xChol)
     # euclidian distance

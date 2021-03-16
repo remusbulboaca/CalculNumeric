@@ -44,13 +44,13 @@ def main(filename, mode, len):
     print("\nEpsilon: ", epsilon)
 
     if verify_matrix(A):
-
         # descompunerea L
         L = cholesky(A)
         print("\nL:\n", L)
         # L transpusa
         Lt = np.array(transpusa(L))
-        print("Lt : \n", Lt)
+        print("Lt : \n",Lt)
+
 
         # Ex2:
         print("-" * 20)
@@ -69,7 +69,8 @@ def main(filename, mode, len):
         print("\n Ex4: \n")
         if mode == "File":
             A1 = np.array(data[0])
-        solution_check(A1, x, b)
+        solution_check(A1,x,b)
+
 
         # Ex5:
         print("-" * 20)
@@ -77,13 +78,13 @@ def main(filename, mode, len):
         if mode == "File":
             A1 = np.array(data[0])
         p, l, u = lu(A1)
-        print("\nMatrice: \n", A1)
-        print("\nL:\n", l, "\n")
-        print("\nU:\n", u, "\n")
+        print("\nMatrice: \n",A1)
+        print("\nL:\n",l, "\n")
+        print("\nU:\n",u, "\n")
         x = np.linalg.solve(A1, b)
-        print("\nx:\n", x)
+        print("\nx:\n",x)
 
-        # Ex6:
+        #Ex6:
         print("-" * 20)
         print("\nEx6:")
         print("\nLLt:\n", invert_matrix(LLt_generate(L, Lt), epsilon), "\n")
