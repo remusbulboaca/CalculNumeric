@@ -1,1 +1,1 @@
-print(operations.compare_vectors(aplusb))
+print(operations.multiply(anew,b)[0][0])

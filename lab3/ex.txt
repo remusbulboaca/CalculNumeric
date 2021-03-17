@@ -1,0 +1,24 @@
+caz prima coloana din A
+j=1
+a11 * b11 
+a12 * b21
+... 0*0 ...
+a[line][1] * matriceB.a[0]
+a[line][2] * matriceB.c[0]
+
+j = 2
+a11 * b12   // b  
+a12 * b22   // a
+a13 * b32   // c
+
+j = 3 
+a12 * b23   
+a13 * b33
+a14 * b43
+
+j = (1,n) 
+a[i][j-1] * b[j-1][j]
+a[i][j] * a[j][j]
+a[i][j+1] * c[j+1][j]
+
+
