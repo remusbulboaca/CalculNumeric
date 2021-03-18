@@ -3,7 +3,6 @@ from copy import copy, deepcopy
 
 epsilon = 10 ** float(-16)
 
-
 class matriceA:
     a = []
 
@@ -28,7 +27,6 @@ class matriceA:
                 if not already:
                     a[i].append((val, j))
             self.a = a
-
 
 class matriceB:
     a = []
@@ -62,7 +60,6 @@ class matriceB:
         self.c = c
         self.p = p
         self.q = q
-
 
 class Matrix_operations:
     sum = []
@@ -103,7 +100,7 @@ class Matrix_operations:
                 if (j[1] - line == q):
                     sumcopy[line][index] = (j[0] * matriceB.b[j[1] - q + 1], j[1])
                 if (line - j[1] == p):
-                    sumcopy[line][index] = (j[0] * matriceB.c[j[1] - p], j[1])
+                    sumcopy[line][index] = (j[0] * matriceB.c[line - p], j[1])
 
         self.sum = sumcopy
 
@@ -120,41 +117,62 @@ class Matrix_operations:
                     return False
         return True
 
+def verificare_adunare_main(matrixB,matrixA):
+    operations = Matrix_operations()
+    operations.sum(matrixB, matrixA)
+    aplusb = matriceA
+    aplusb.citire_eficienta_a(aplusb, "res/aplusb.txt")
+    return operations.compare_vectors(aplusb.a, matrixA.a)
+
+def verificare_inmultire_main(matrixB):
+    a1 = matriceA
+    a1.citire_eficienta_a(a1, "res/a.txt")
+
+    aorib = matriceA
+    aorib.citire_eficienta_a(aorib, "res/aorib.txt")
+
+    operations = Matrix_operations()
+    operations.multiply(a1,matrixB)
+
+    return operations.compare_vectors(aorib.a, a1.a)
 
 
-a = matriceA
-a.citire_eficienta_a(a, "res/a.txt")
-
-b = matriceB
-b.citire_eficienta_b(b, "res/b.txt")
-
-
-# # ----------------------------------------------------------------
-# Adunare
-print("\nAdunare:")
-
-
-operations = Matrix_operations()
-operations.sum(b, a)
-
-aplusb = matriceA
-aplusb.citire_eficienta_a(aplusb, "res/aplusb.txt")
-print(operations.compare_vectors(aplusb.a, a.a))
-print("\n")
-
-# # ----------------------------------------------------------------
-# Inmultire
-
-print("Inmultire: ")
-a1 = matriceA
-a1.citire_eficienta_a(a1, "res/a.txt")
-
-aorib = matriceA
-aorib.citire_eficienta_a(aorib, "res/aorib.txt")
-
-operations = Matrix_operations()
-operations.multiply(a1,b)
-# print(a1.a[1])
-# print(aorib.a[1])
-print(operations.compare_vectors(aorib.a, a1.a))
-print("\n")
+# a = matriceA
+# a.citire_eficienta_a(a, "res/a.txt")
+#
+# b = matriceB
+# b.citire_eficienta_b(b, "res/b.txt")
+#
+#
+# # # ----------------------------------------------------------------
+# # Adunare
+# print("\nAdunare:")
+#
+# print(verificare_adunare_main(b,a))
+#
+# # operations = Matrix_operations()
+# # operations.sum(b, a)
+# #
+# # aplusb = matriceA
+# # aplusb.citire_eficienta_a(aplusb, "res/aplusb.txt")
+# # print(operations.compare_vectors(aplusb.a, a.a))
+# # print("\n")
+#
+# # # ----------------------------------------------------------------
+# # Inmultire
+#
+# print("Inmultire: ")
+# # a1 = matriceA
+# # a1.citire_eficienta_a(a1, "res/a.txt")
+# #
+# # aorib = matriceA
+# # aorib.citire_eficienta_a(aorib, "res/aorib.txt")
+# #
+# # operations = Matrix_operations()
+# # operations.multiply(a1,b)
+# # # print(a1.a[1])
+# # # print(aorib.a[1])
+# # print(operations.compare_vectors(aorib.a, a1.a))
+# # print("\n")
+#
+# print(verificare_inmultire_main(b))
