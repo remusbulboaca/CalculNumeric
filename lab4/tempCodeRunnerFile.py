@@ -1,0 +1,1 @@
+AxGS = product(a,b,c,gauss_seidel(a,b,c,f))

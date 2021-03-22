@@ -75,9 +75,9 @@ def formula3(a, b, c, f, x_GS):
 
 
 def gauss_seidel(a,b,c,f):
-    x_GS = np.zeros(len(f))
+    x_GS = np.zeros(len(f)-1)
     k = 0
-    epsilon = 10 ** -8
+    epsilon = 10 ** -4
     while(True):
         delta_x = formula3(a,b,c,f,x_GS)
 
@@ -90,8 +90,34 @@ def gauss_seidel(a,b,c,f):
     else:
         return -1
 
-a,b,c,p,q = get_mtx('res/a2.txt')
-f = read_f('res/f2.txt')
-print(len(f))
+def product(a,b,c,x_GS):
+    b = np.zeros(len(a)-1)
+    for i in range(len(a)-1):
+        sum = 0
+        if i == 0:
+            sum += a[i] * x_GS[i] + b[i] * x_GS[i]
+        if i == len(a):
+            sum += a[i] * x_GS[i] + c[i-1] * x_GS[i-1]
+        else:
+            sum += a[i] * x_GS[i] + c[i-1] * x_GS[i-1] + b[i] * x_GS[i]
+        b[i] = sum
+    return b
+
+def norma(v1, v2):
+    max = 0
+    for i in range(len(v1)):
+        if abs(v1[i] - v2[i]) > max:
+            max = abs(v1[i] - v2[i])
+
+    return max
+
+def check(a,b,c,f):
+        AxGS = product(a,b,c,gauss_seidel(a,b,c,f))
+        print(norma(AxGS,f))
+
+a,b,c,p,q = get_mtx('res/a4.txt')
+f = read_f('res/f4.txt')
+# print(np.round(gauss_seidel(a,b,c,f),decimals = 1))
+# check(a,b,c,f)
 
 print(gauss_seidel(a,b,c,f))
