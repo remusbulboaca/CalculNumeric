@@ -1,1 +1,0 @@
-'Formula: ||x^n - x|| <= q0^n / (1-q0) * sqrt(norma)'
