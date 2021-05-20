@@ -1,1 +1,0 @@
-print(operations.multiply(anew,b)[0][0])
